@@ -1,23 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
 
-import { Navbar } from './navbar';
+@Component({
+  selector: 'app-navbar',
+  standalone: true,
+  templateUrl: './navbar.html',
+  styleUrl: './navbar.scss',
+})
+export class NavbarComponent {
+  scrollTo(sectionId: string, event?: Event) {
+    event?.preventDefault();
 
-describe('Navbar', () => {
-  let component: Navbar;
-  let fixture: ComponentFixture<Navbar>;
+    const el = document.getElementById(sectionId);
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [Navbar]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(Navbar);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  scrollToTop(event?: Event) {
+    event?.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
